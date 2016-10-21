@@ -1,6 +1,6 @@
 ##astrakk's ｈａｃｋｍｕｄ scripts
 
-A collection of scripts I've written for [ｈａｃｋｍｕｄ]{https://www.hackmud.com/}. No quality guaranteed.
+A collection of scripts I've written for [ｈａｃｋｍｕｄ](https://www.hackmud.com/). No quality guaranteed.
 
 And also almost 0 documentation...
 
