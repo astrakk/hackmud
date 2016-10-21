@@ -1,5 +1,5 @@
 function (context, args) {// from:"", to:""
-	if(!args || !args.from || !args.to){
+	if(!args.from || !args.to){
 		return "Please remember to include !from! and !to! keys."	
 	}
 	var lib = #s.scripts.lib();
