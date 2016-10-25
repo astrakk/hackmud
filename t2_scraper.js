@@ -21,13 +21,9 @@ function(context, args){// t1:"", t2:""
 		}}}}}
 		log.push("FULLSEC Scanned: "+i+ "\nHIGHSEC Scanned: "+a+ "\nMatches Found: "+m);
 		return log;
-	}
-
-	if(args && !args.t1 || !args.t2){
+	} else if(args && !args.t1 || !args.t2){
 		return "Don't forget to specify T1 and T2 script names with !t1! and !t2! keys.";
-	}
-
-	if(args && args.t1 && args.t2 && !args.username){ //Args provided. t1 must provide. t2 must provide. username not provide
+	} else if(args && args.t1 && args.t2 && !args.username){ //Args provided. t1 must provide. t2 must provide. username not provide
 
 		for(i = 0; i < dbcmd.length; ++i){
 			if(args.t1.call({}).indexOf(dbcmd[i] + ":") > -1 && done != true){
@@ -55,8 +51,7 @@ function(context, args){// t1:"", t2:""
 		}}}
 		names.push("\nNow add a !username! key with the username you want to retrieve the QR codes for.");
 		return names;
-	}
-	if(args && args.t1 && args.t2 && args.username){
+	} else if(args && args.t1 && args.t2 && args.username){
 		done=false;
 		for(i = 0; i < dbcmd.length; ++i){
 			if(args.t2.call({username:args.username}).indexOf("!"+dbcmd[i]+"!") > -1 && done != true){
