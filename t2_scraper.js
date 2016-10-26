@@ -5,7 +5,8 @@ function(context, args){// t1:"", t2:""
 	var lib = #s.scripts.lib();
 	var i, a, done = false, names = [], log = [];
 	
-	if(!args || !args.t1 && !args.t2 && !args.username){
+	//No arguments provided. No t1, t2, username, or order_id.
+	if(!args || !args.t1 && !args.t2 && !args.username && !args.order_id){
 		var fs = #s.scripts.fullsec();
 		var hs = #s.scripts.highsec();
 		var npc = ["amal_robo","archaic","arino","blackstar","bluebun","bunnybat_hut","context","core","cyberdine","empty_nest","futuretech","halperyon","kill_9_1","kill_bio","legion_bible","legion_intl","light","lowell_extermination","marco_polo","merrymore_pharma","nation_of_wales","nuutec","protein_prevention","ros13","ros_13_update_checker","setec_gas","sn_w","soylentbean","suborbital_airlines","tandoori","the_holy_checksum","turing_testing","tyrell","vacuum_rescue","welsh_measles_info","weyland","world_pop"];
@@ -19,11 +20,10 @@ function(context, args){// t1:"", t2:""
 							log.push(fs[i] + "\n"+hs[a]+"\n");
 							++m
 		}}}}}
-		log.push("FULLSEC Scanned: "+i+ "\nHIGHSEC Scanned: "+a+ "\nMatches Found: "+m);
+		log.push("Now add !t1! and !t2! keys for the script pair you want to scrape.");
 		return log;
-	} else if(args && !args.t1 || !args.t2){
-		return "Don't forget to specify T1 and T2 script names with !t1! and !t2! keys.";
-	} else if(args && args.t1 && args.t2 && !args.username){ //Args provided. t1 must provide. t2 must provide. username not provide
+
+	} else if(args && args.t1 && args.t2 && !args.username && !args.order_id){ //Arguments provided. t1 and t2 provided. Username and order_id not.
 
 		for(i = 0; i < dbcmd.length; ++i){
 			if(args.t1.call({}).indexOf(dbcmd[i] + ":") > -1 && done != true){
@@ -51,15 +51,21 @@ function(context, args){// t1:"", t2:""
 		}}}
 		names.push("\nNow add a !username! key with the username you want to retrieve the QR codes for.");
 		return names;
-	} else if(args && args.t1 && args.t2 && args.username){
+	} else if(args && args.t1 && args.t2 && args.username && !args.order_id){ //Arguments provided. t1, t2, username provided. order_id not.
 		done=false;
 		for(i = 0; i < dbcmd.length; ++i){
 			if(args.t2.call({username:args.username}).indexOf("!"+dbcmd[i]+"!") > -1 && done != true){
 				var key2 = dbcmd[i];
 				done = true;
 		}}
-		return args.t2.call({username:args.username, [key2]:"order_qrs"});
+		log.push(args.t2.call({username:args.username, [key2]:"order_qrs"}) + "\n\nNow scan a QR code and add an !order_id! key containing the order id for that QR code.");
+		return log;	
+	} else if(args && args.t1 && args.t2 && args.username && args.order_id){ //All arguments provided.
+		return "This is as far as I've gotten. Work will continue shortly.";
+	} else if(args && !args.t1 || !args.t2){ //Arguments provided. No t1 or t2.
+		return "Don't forget to specify T1 and T2 script names with !t1! and !t2! keys.";
+	} else if(args && !args.username && args.order_id){ //Arguments provided. No username. order_id provided.
+		return "Don't forget to specify a !username! for the !order_id!.";
 	}
-	
 	return("How... how are you reading this? What the hell?");
 };
