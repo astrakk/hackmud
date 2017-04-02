@@ -1,6 +1,6 @@
-##astrakk's ｈａｃｋｍｕｄ scripts
+## astrakk's hackmud scripts
 
-A collection of scripts I've written for [ｈａｃｋｍｕｄ](https://www.hackmud.com/). No quality guaranteed.
+A collection of scripts I've written for [hackmud](https://www.hackmud.com/). No quality guaranteed.
 
 And also almost 0 documentation...
 
@@ -9,7 +9,3 @@ And also almost 0 documentation...
  Place the required scripts into the following folders:
 - **Windows**: `%AppData%\hackmud\<username>\scripts`
 - **Mac & Linux**: `~/.config/hackmud/<username>/scripts`
-
-## License
-
-DO WITH THIS WHAT YOU WISH!
